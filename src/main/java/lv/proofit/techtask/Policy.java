@@ -2,27 +2,30 @@ package lv.proofit.techtask;
 
 import java.util.Collections;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Policy can have multiple policy objects and each policy object can have multiple sub-objects.
  * @author Anatolijs Gorbunovs
  */
+@Component
 public class Policy {
 	
 	/**
 	 * number. Policy number e.g. LV20-02-100000-5.
 	 */
-	private String number;
+	private final String number;
 	
 	/**
 	 * status. Policy status e.g. REGISTERED, APPROVED.
 	 */
-	private PolicyStatus status;
+	private final PolicyStatus status;
 	
 	/**
 	 * objects. Policy objects, immutable collection of one or multiple objects.
 	 */
-	private List<PolicyObject> objects;
+	private final List<PolicyObject> objects;
 	
 	public String getNumber() {
 		return number;
@@ -36,6 +39,7 @@ public class Policy {
 		return objects;
 	}
 	
+	@Autowired(required = false)
 	public Policy(String number, PolicyStatus status, List<PolicyObject> objects) {
 		if (number == null) {
 			throw new IllegalArgumentException("Policy number must be specified.");

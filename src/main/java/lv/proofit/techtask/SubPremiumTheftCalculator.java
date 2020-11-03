@@ -1,12 +1,14 @@
 package lv.proofit.techtask;
 
 import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Anatolijs Gorbunovs
  */
-public class PremiumTheftCalculator implements SubPremiumCalculator {
+@Service
+public class SubPremiumTheftCalculator implements SubPremiumCalculator {
 
 	private static final BigDecimal THRESHOLD_SUM_THEFT = new BigDecimal("15.00");
 	

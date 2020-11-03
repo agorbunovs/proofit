@@ -1,12 +1,14 @@
 package lv.proofit.techtask;
 
 import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Anatolijs Gorbunovs
  */
-public class PremiumFireCalculator implements SubPremiumCalculator {
+@Service
+public class SubPremiumFireCalculator implements SubPremiumCalculator {
 
 	private static final BigDecimal THRESHOLD_SUM_FIRE = new BigDecimal("100.00");
 	

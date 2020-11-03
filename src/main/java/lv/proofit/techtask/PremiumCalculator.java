@@ -1,20 +1,29 @@
 package lv.proofit.techtask;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Calculator that performs the main task.
  * @author Anatolijs Gorbunovs
  */
+@Service
 public class PremiumCalculator {
 	
 	private Map<RiskType, SubPremiumCalculator> subCalculators;
 	
+	@Autowired(required = false)
 	public PremiumCalculator(List<SubPremiumCalculator> subCalculators) {
+		if (subCalculators == null) {
+			throw new IllegalArgumentException("Sub-calculators must be provided.");
+		}
+		
 		Map<RiskType, SubPremiumCalculator> calculators = new HashMap<>();
 		for (SubPremiumCalculator subCalculator : subCalculators) {
 			if (subCalculator.getRiskType() == null) {
@@ -56,6 +65,6 @@ public class PremiumCalculator {
 			result = result.add(subCalculators.get(riskType).calculate(subSum));
 		}
 		
-		return result;
+		return result.setScale(2, RoundingMode.HALF_UP);
 	}
 }

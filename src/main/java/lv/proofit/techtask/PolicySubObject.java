@@ -1,27 +1,30 @@
 package lv.proofit.techtask;
 
 import java.math.BigDecimal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Policy sub-objects can be related only to one policy object.
  * @author Anatolijs Gorbunovs
  */
+@Component
 public class PolicySubObject {
 	
 	/**
 	 * name. Sub-object name e.g. TV.
 	 */
-	private String name;
+	private final String name;
 	
 	/**
 	 * sumInsured. Cost that will be covered by insurance.
 	 */
-	private BigDecimal sumInsured;
+	private final BigDecimal sumInsured;
 	
 	/**
 	 * riskType. Risk type e.g. FIRE, THEFT.
 	 */
-	private RiskType riskType;
+	private final RiskType riskType;
 	
 	/**
 	 * parent. Policy object that holds this sub-object.
@@ -42,11 +45,12 @@ public class PolicySubObject {
 	
 	void setParent(PolicyObject parent) {
 		if (this.parent != null) {
-			throw new IllegalStateException("Cannot parentize policy sub-object more than once.");
+			throw new IllegalArgumentException("Cannot parentize policy sub-object more than once.");
 		}
 		this.parent = parent;
 	}
 	
+	@Autowired(required = false)
 	public PolicySubObject(String name, BigDecimal sumInsured, RiskType riskType) {
 		if (name == null) {
 			throw new IllegalArgumentException("Policy sub-object must have name.");

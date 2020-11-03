@@ -1,15 +1,18 @@
-package lv.proofit.techtask;
+package lv.proofit.techtask.test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import lv.proofit.techtask.Policy;
+import lv.proofit.techtask.PolicyObject;
+import lv.proofit.techtask.PolicyStatus;
+import lv.proofit.techtask.PolicySubObject;
+import lv.proofit.techtask.RiskType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
-@SpringBootTest
 public class PolicyTest {
 
 	@Test
